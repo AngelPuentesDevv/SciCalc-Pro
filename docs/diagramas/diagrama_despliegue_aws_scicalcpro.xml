@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-04-02T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram id="deploy-scicalcpro-aws-v1" name="Diagrama de Despliegue AWS - SciCalc Pro">
+    <mxGraphModel dx="1900" dy="1300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TÍTULO -->
+        <mxCell id="titulo" value="Diagrama de Despliegue — Entorno Cloud AWS · SciCalc Pro" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="15" width="760" height="32" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             ACTOR: Usuario Final (fuera de la nube)
+        ═══════════════════════════════════════════════════════════ -->
+        <mxCell id="actor_user" value="Usuario Final" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="550" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_dev" value="Desarrollador&#xa;(CI/CD)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="250" width="40" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             NODO RAÍZ: AWS Cloud
+        ═══════════════════════════════════════════════════════════ -->
+        <mxCell id="node_aws" value="&lt;b&gt;«cloud»&lt;/b&gt;&lt;br/&gt;AWS Cloud  ·  Región: us-east-1" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=280;tabHeight=30;fontSize=14;fontStyle=0;fillColor=#fff9e6;strokeColor=#e6a800;strokeWidth=2.5;" vertex="1" parent="1">
+          <mxGeometry x="140" y="60" width="2190" height="1580" as="geometry" />
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────────────────────
+             SERVICIOS GLOBALES / PERIMETRALES
+        ───────────────────────────────────────────────────────── -->
+
+        <!-- Route 53 -->
+        <mxCell id="svc_r53" value="&lt;b&gt;Route 53&lt;/b&gt;&lt;br/&gt;DNS · scicalcpro.example.com&#xa;Tipo: A → ALB" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="200" y="160" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ACM -->
+        <mxCell id="svc_acm" value="&lt;b&gt;ACM&lt;/b&gt;&lt;br/&gt;Certificado TLS/SSL&#xa;*.scicalcpro.example.com" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="500" y="160" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- IAM -->
+        <mxCell id="svc_iam" value="&lt;b&gt;IAM&lt;/b&gt;&lt;br/&gt;Roles y Políticas&#xa;EC2InstanceRole · RDSAccessPolicy" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="800" y="160" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ECR -->
+        <mxCell id="svc_ecr" value="&lt;b&gt;ECR&lt;/b&gt;&lt;br/&gt;Elastic Container Registry&#xa;scicalcpro/backend:latest" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="160" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CloudWatch -->
+        <mxCell id="svc_cw" value="&lt;b&gt;CloudWatch&lt;/b&gt;&lt;br/&gt;Logs · Métricas · Alertas&#xa;/health · latencia P95" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="160" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- S3 (assets estáticos) -->
+        <mxCell id="svc_s3" value="&lt;b&gt;S3&lt;/b&gt;&lt;br/&gt;scicalcpro-static&#xa;CSS / JS / Imágenes" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="160" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             VPC
+        ═══════════════════════════════════════════════════════════ -->
+        <mxCell id="node_vpc" value="&lt;b&gt;«node»&lt;/b&gt;&lt;br/&gt;VPC · 10.0.0.0/16" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=220;tabHeight=26;fontSize=13;fontStyle=0;fillColor=#e6f3ff;strokeColor=#0066cc;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="180" y="320" width="2100" height="1270" as="geometry" />
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────────────────────
+             SUBRED PÚBLICA — ALB
+        ───────────────────────────────────────────────────────── -->
+        <mxCell id="subnet_pub" value="&lt;b&gt;Subred Pública&lt;/b&gt;  10.0.1.0/24  ·  AZ: us-east-1a" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=330;tabHeight=24;fontSize=11;fontStyle=0;fillColor=#e8ffe8;strokeColor=#007700;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="220" y="400" width="1960" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- ALB -->
+        <mxCell id="svc_alb" value="&lt;b&gt;«node»&lt;/b&gt;&lt;br/&gt;Application Load Balancer (ALB)&lt;br/&gt;HTTPS :443  →  HTTP :8000&lt;br/&gt;Listener Rule: /* → TargetGroup" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="600" y="460" width="400" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Security Group ALB -->
+        <mxCell id="sg_alb" value="Security Group: sg-alb&#xa;Inbound: 443 (0.0.0.0/0) · 80 (redirect)" style="text;html=1;align=left;fontSize=10;fontStyle=2;fillColor=none;strokeColor=none;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="490" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────────────────────
+             SUBRED PRIVADA A — EC2
+        ───────────────────────────────────────────────────────── -->
+        <mxCell id="subnet_priv_a" value="&lt;b&gt;Subred Privada A&lt;/b&gt;  10.0.2.0/24  ·  AZ: us-east-1a" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=330;tabHeight=24;fontSize=11;fontStyle=0;fillColor=#fff0e6;strokeColor=#cc6600;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="220" y="710" width="1120" height="530" as="geometry" />
+        </mxCell>
+
+        <!-- EC2 Instance -->
+        <mxCell id="node_ec2" value="&lt;b&gt;«node»&lt;/b&gt;&lt;br/&gt;EC2 t3.small  ·  Amazon Linux 2023&lt;br/&gt;&lt;i style='font-size:10px'&gt;Docker 24 · Python 3.12&lt;/i&gt;" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=290;tabHeight=24;fontSize=11;fontStyle=0;fillColor=#ffd9b3;strokeColor=#cc6600;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="270" y="790" width="980" height="400" as="geometry" />
+        </mxCell>
+
+        <!-- Container FastAPI -->
+        <mxCell id="cont_fastapi" value="&lt;b&gt;«container»&lt;/b&gt;  scicalcpro/backend:latest&lt;br/&gt;FastAPI + Uvicorn  ·  puerto :8000" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=300;tabHeight=22;fontSize=10;fontStyle=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="310" y="865" width="880" height="280" as="geometry" />
+        </mxCell>
+
+        <mxCell id="comp_router2" value="«component»&#xa;Router FastAPI&#xa;/api/v1 · /web · /health" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="340" y="930" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_usecase2" value="«component»&#xa;Application Layer&#xa;EvaluateExpressionUseCase&#xa;HistoryUseCase · AuthUseCase" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="560" y="930" width="195" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_infra2" value="«component»&#xa;Infrastructure Layer&#xa;SQLAlchemy 2.0 asyncpg&#xa;JWT · Pydantic" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="780" y="930" width="195" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="art_env2" value="«artifact»&#xa;ENV via AWS Secrets Manager&#xa;DATABASE_URL · SECRET_KEY" style="shape=mxgraph.uml.component;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="340" y="1040" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Security Group EC2 -->
+        <mxCell id="sg_ec2" value="Security Group: sg-ec2&#xa;Inbound: 8000 (sg-alb únicamente)" style="text;html=1;align=left;fontSize=10;fontStyle=2;fillColor=none;strokeColor=none;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="270" y="1195" width="320" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────────────────────
+             SUBRED PRIVADA B — RDS
+        ───────────────────────────────────────────────────────── -->
+        <mxCell id="subnet_priv_b" value="&lt;b&gt;Subred Privada B&lt;/b&gt;  10.0.3.0/24  ·  AZ: us-east-1b" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=330;tabHeight=24;fontSize=11;fontStyle=0;fillColor=#fce4ec;strokeColor=#c62828;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="710" width="860" height="530" as="geometry" />
+        </mxCell>
+
+        <!-- RDS -->
+        <mxCell id="node_rds" value="&lt;b&gt;«node»&lt;/b&gt;&lt;br/&gt;RDS PostgreSQL 15  ·  db.t3.micro&lt;br/&gt;puerto :5432  ·  Multi-AZ: No (dev)" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=320;tabHeight=24;fontSize=11;fontStyle=0;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="790" width="760" height="400" as="geometry" />
+        </mxCell>
+
+        <mxCell id="comp_pg2" value="«component»&#xa;PostgreSQL 15&#xa;Motor RDBMS" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="880" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="art_db2" value="«artifact»&#xa;scicalc_db&#xa;users · calculation_history&#xa;sessions · audit_log" style="shape=mxgraph.uml.component;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1730" y="870" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="art_pg_backup" value="«artifact»&#xa;Automated Backups&#xa;Retención: 7 días" style="shape=mxgraph.uml.component;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1480" y="1000" width="210" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Security Group RDS -->
+        <mxCell id="sg_rds" value="Security Group: sg-rds&#xa;Inbound: 5432 (sg-ec2 únicamente)" style="text;html=1;align=left;fontSize=10;fontStyle=2;fillColor=none;strokeColor=none;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="1195" width="330" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             ENLACES DE COMUNICACIÓN
+        ═══════════════════════════════════════════════════════════ -->
+
+        <!-- Usuario → Route 53 -->
+        <mxCell id="lnk_user_r53" value="HTTPS :443&#xa;scicalcpro.example.com" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=2;strokeColor=#0066CC;endArrow=open;endFill=0;" edge="1" source="actor_user" target="svc_r53" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Route 53 → ALB -->
+        <mxCell id="lnk_r53_alb" value="DNS A Record" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=1.5;strokeColor=#0066CC;endArrow=open;endFill=0;" edge="1" source="svc_r53" target="svc_alb" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ACM → ALB (certificado) -->
+        <mxCell id="lnk_acm_alb" value="TLS Cert" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=1.5;strokeColor=#d79b00;dashed=1;endArrow=open;endFill=0;" edge="1" source="svc_acm" target="svc_alb" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ALB → EC2 -->
+        <mxCell id="lnk_alb_ec2" value="HTTP :8000&#xa;Target Group" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=2;strokeColor=#007700;endArrow=open;endFill=0;" edge="1" source="svc_alb" target="node_ec2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- EC2 → RDS -->
+        <mxCell id="lnk_ec2_rds" value="asyncpg / TCP :5432&#xa;SQLAlchemy 2.0" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=2;strokeColor=#b85450;endArrow=open;endFill=0;" edge="1" source="cont_fastapi" target="node_rds" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- EC2 → CloudWatch -->
+        <mxCell id="lnk_ec2_cw" value="Logs / Métricas" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=1.5;strokeColor=#d79b00;dashed=1;endArrow=open;endFill=0;" edge="1" source="node_ec2" target="svc_cw" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- EC2 → S3 (assets) -->
+        <mxCell id="lnk_ec2_s3" value="s3:GetObject&#xa;CSS/JS estáticos" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=1.5;strokeColor=#d79b00;dashed=1;endArrow=open;endFill=0;" edge="1" source="node_ec2" target="svc_s3" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Dev → ECR (CI/CD) -->
+        <mxCell id="lnk_dev_ecr" value="GitHub Actions&#xa;docker push" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=1.5;strokeColor=#9673a6;dashed=1;endArrow=open;endFill=0;" edge="1" source="actor_dev" target="svc_ecr" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ECR → EC2 (pull image) -->
+        <mxCell id="lnk_ecr_ec2" value="docker pull" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=10;strokeWidth=1.5;strokeColor=#9673a6;dashed=1;endArrow=open;endFill=0;" edge="1" source="svc_ecr" target="node_ec2" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ─────────────────────────────────────────────────────────
+             NOTA
+        ───────────────────────────────────────────────────────── -->
+        <mxCell id="nota" value="Nota: Entorno de desarrollo cloud. Multi-AZ y Auto Scaling Group quedan fuera del alcance del prototipo.&#xa;Las variables sensibles (DATABASE_URL, SECRET_KEY) se gestionan mediante AWS Secrets Manager, nunca en código fuente." style="text;html=1;align=left;verticalAlign=middle;resizable=0;fontSize=10;fontStyle=2;fillColor=none;strokeColor=none;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="160" y="1660" width="1900" height="40" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

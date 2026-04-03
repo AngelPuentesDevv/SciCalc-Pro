@@ -1,0 +1,87 @@
+﻿ID,Work Item Type,Title,Assigned To,State,Tags
+"100","Task","SciCalc Pro",,"To Do",
+"101","Epic","Sprint 1 (Base y Cálculo): 20 de Febrero - 5 de Marzo",,"New",
+"102","Epic","Sprint 2 (Funciones y UI): 6 de Marzo - 19 de Marzo",,"New",
+"103","Epic","Sprint 3 (Seguridad): 20 de Marzo - 2 de Abril",,"New",
+"104","Epic","Sprint 4 (Soporte y Cierre): 3 de Abril - 16 de Abril",,"New",
+"105","Product Backlog Item","RF-01",,"New","Backend; Frontend"
+"106","Product Backlog Item","RF-02",,"New","Backend"
+"107","Product Backlog Item","RNF-01",,"New","Frontend"
+"108","Product Backlog Item","RNF-03",,"New","UX/UI Designer"
+"109","Product Backlog Item","RNF-05",,"New","Backend"
+"110","Product Backlog Item","RNF-SUP-01",,"New","Backend; QA"
+"111","Product Backlog Item","RF-03",,"New","DBA; Frontend"
+"112","Product Backlog Item","RF-04",,"New","Frontend"
+"113","Product Backlog Item","RF-05",,"New","Backend"
+"114","Product Backlog Item","RF-07",,"New","Frontend"
+"115","Product Backlog Item","RNF-04",,"New","Backend; Frontend"
+"116","Product Backlog Item","RNF-08",,"New","Backend"
+"117","Product Backlog Item","RNF-SEC-01",,"New","Security Engineer"
+"118","Product Backlog Item","RNF-SEC-02",,"New",
+"119","Product Backlog Item","RNF-SEC-03",,"New","DevSecOps"
+"120","Product Backlog Item","RNF-SEC-05",,"New","Frontend"
+"121","Product Backlog Item","RNF-SEC-06",,"New","Security Engineer"
+"122","Product Backlog Item","RNF-SUP-02",,"New","Backend"
+"123","Product Backlog Item","RNF-SUP-03",,"New","Frontend"
+"124","Product Backlog Item","RNF-SUP-05",,"New","DBA; Frontend"
+"125","Product Backlog Item","RNF-SUP-07",,"New","Backend; Frontend"
+"126","Epic","Cierre",,"New",
+"127","Task","Motor lógico",,"To Do",
+"128","Task","Teclado númerico",,"To Do",
+"129","Task","Validación de errores",,"To Do",
+"130","Task","Pruebas unitarias",,"To Do",
+"131","Task","Math Library",,"To Do",
+"132","Task","Toggle para grados/radianes",,"To Do",
+"133","Task","UI funciones secundarias",,"To Do",
+"134","Task","Validar resultados contra estándares industriales",,"To Do",
+"135","Task","Algorítmos de parsing",,"To Do",
+"136","Task","Renderizado UI",,"To Do",
+"137","Task","Pruebas de latencia",,"To Do",
+"138","Task","Mockups de alta fidelidad",,"To Do",
+"139","Task","Navegación entre modo simple y modo científico",,"To Do",
+"140","Task","Principios de ergonomía movil",,"To Do",
+"141","Task","Configurar tipos de datos de doble precisión (64-bit)",,"To Do",
+"142","Task","Lógica de redondeo",,"To Do",
+"143","Task","Validación extrema",,"To Do",
+"144","Task","Sistema de logs",,"To Do",
+"145","Task","Interceptor de excepciones",,"To Do",
+"146","Task","Sistema de logs para desarrolladores",,"To Do",
+"147","Task","Esquema de DB en SQLite",,"To Do",
+"148","Task","Lógica de inserción",,"To Do",
+"149","Task","UI para historial",,"To Do",
+"150","Task","Estado global de memoria",,"To Do",
+"151","Task","Lógica de operaciones",,"To Do",
+"152","Task","UI de ""Memoria activa""",,"To Do",
+"153","Task","Factores de conversión",,"To Do",
+"154","Task","Selector de unidades dinámico",,"To Do",
+"155","Task","Conversor en tiempo real",,"To Do",
+"156","Task","Implementar theming",,"To Do",
+"157","Task","Tema claro / oscuro",,"To Do",
+"158","Task","Validar contrastes UI",,"To Do",
+"159","Task","Entorno multiplataforma",,"To Do",
+"160","Task","Componentes nativos para cada SO",,"To Do",
+"161","Task","Compilaciones de prueba",,"To Do",
+"162","Task","Ciclos de vida procesador",,"To Do",
+"163","Task","Uso de tareas en segundo plano",,"To Do",
+"164","Task","Consumo de mA durante cálculos intensivos",,"To Do",
+"165","Task","Integrar API (FaceID/Fingerprint)",,"To Do",
+"166","Task","UI de ingreso de PIN de respaldo",,"To Do",
+"167","Task","Lógica de bloqueo",,"To Do",
+"168","Task","Configurar ProGuard / R8 para ofuscación.",,"To Do",
+"169","Task","Renombrar clases y métodos críticos",,"To Do",
+"170","Task","Validar que la ofuscación no rompa el motor matemático",,"To Do",
+"171","Task","Flag de ventana segura en Android",,"To Do",
+"172","Task","Desarrollar ""Blur"" u ocultamiento en multitarea iOS",,"To Do",
+"173","Task","Notificar al usuario si se detecta intento de captura",,"To Do",
+"174","Task","Firma digital",,"To Do",
+"175","Task","Desarrollar detector de modo ""Root"" o ""Jailbreak""",,"To Do",
+"176","Task","Crear acción de cierre automático ante manipulación",,"To Do",
+"177","Task","Empaquetado de logs",,"To Do",
+"178","Task","Compartir diagnóstico",,"To Do",
+"179","Task","Anonimizar datos personales en el reporte",,"To Do",
+"180","Task","Redactar contenido de ayuda para cada función",,"To Do",
+"181","Task","Visor de documentos PDF/Markdown interno",,"To Do",
+"182","Task","Tooltips",,"To Do",
+"183","Task","Exportación a archivo plano cifrado",,"To Do",
+"184","Task","Función de importación con validación",,"To Do",
+"185","Task","Crear guía de usuario para traspaso de datos",,"To Do",

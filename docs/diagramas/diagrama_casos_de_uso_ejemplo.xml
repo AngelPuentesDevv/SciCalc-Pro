@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-03-10T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram id="use-case-steam-v3" name="Diagrama de Casos de Uso - Plataforma Steam">
+    <mxGraphModel dx="1900" dy="1300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="titulo" value="Diagrama de Casos de Uso - Plataforma Steam" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="15" width="420" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" value="Plataforma Steam" style="shape=mxgraph.sysml.package;align=left;spacingLeft=10;verticalAlign=top;spacingTop=5;tabWidth=210;tabHeight=25;fontSize=14;fontStyle=1;fillColor=none;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="60" width="1550" height="1800" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_visitante" value="Visitante" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="170" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_jugador" value="Usuario Base&#xa;/ Jugador" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="690" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_dev" value="Desarrollador&#xa;/ Editor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1400" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_admin" value="Administrador&#xa;de Soporte" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1700" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_pago" value="&lt;&lt;actor&gt;&gt;&#xa;Sistema de Pago&#xa;Externo" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1950" y="420" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gen_vis_jug" style="endArrow=block;endFill=0;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="actor_visitante" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_buscar_juegos" value="Buscar / Filtrar&#xa;Videojuegos&#xa;(RF-01)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="110" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ver_detalle" value="Ver Detalle&#xa;de Videojuego" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="110" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_explorar" value="Explorar&#xa;Plataforma" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="220" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_iniciar_sesion" value="Iniciar Sesion" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="340" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_activar_steamguard" value="Activar&#xa;Steam Guard (2FA)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="340" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_agregar_carrito" value="Agregar al&#xa;Carrito" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="470" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_comprar" value="Comprar&#xa;Videojuego&#xa;(RF-02)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="470" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_validar_disponibilidad" value="Validar&#xa;Disponibilidad" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="370" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_calcular_impuestos" value="Calcular Impuestos&#xa;Regionales" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="470" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_invocar_pasarela" value="Invocar Pasarela&#xa;de Pago" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="370" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_procesar_pago" value="Procesar Pago" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="370" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_generar_recibo" value="Generar Recibo&#xa;de Compra" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="470" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_aplicar_descuento" value="Aplicar Descuento&#xa;/ Cupon" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="570" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_agregar_biblioteca" value="Agregar Juego&#xa;a Biblioteca" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="470" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_gestionar_biblioteca" value="Gestionar&#xa;Biblioteca&#xa;(RF-03)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="680" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_descargar" value="Descargar&#xa;Videojuego" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="630" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_instalar" value="Instalar&#xa;Videojuego" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="720" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_actualizar" value="Actualizar&#xa;Videojuego" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="680" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ejecutar" value="Ejecutar&#xa;Videojuego" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="770" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_verificar_version" value="Verificar Version&#xa;del Servidor" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="680" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_publicar_resena" value="Publicar Resena&#xa;/ Calificar&#xa;(RF-04)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="870" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_comunidad_amigos" value="Comunidad y&#xa;Amigos&#xa;(RF-06)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="980" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_agregar_amigo" value="Agregar Amigo" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="940" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ver_perfil" value="Ver Perfil" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1030" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_inventario_mercado" value="Inventario&#xa;y Mercado&#xa;(RF-07)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1100" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_intercambiar" value="Intercambiar&#xa;Articulos" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1100" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_vender_mercado" value="Vender en&#xa;Mercado" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="1100" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_solicitar_reembolso" value="Solicitar&#xa;Reembolso" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1210" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_validar_reembolso" value="Validar Reembolso&#xa;(&lt;2h, &lt;14 dias)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1210" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_lista_deseados" value="Anadir a Lista&#xa;de Deseados" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="870" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ver_logros" value="Ver Logros" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="870" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_publicar_software" value="Publicar Software&#xa;(RF-05)" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1370" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_gestionar_pagina" value="Gestionar Pagina&#xa;de Tienda" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1330" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_configurar_precio" value="Configurar Precio&#xa;Regional" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1420" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_subir_dlc" value="Subir DLC /&#xa;Actualizacion" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1490" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_ver_estadisticas" value="Ver Estadisticas&#xa;de Ventas" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1600" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_crear_descuento" value="Crear Descuento&#xa;/ Oferta" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1540" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_gestionar_tickets" value="Gestionar Tickets&#xa;de Soporte" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="330" y="1730" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_moderar_comunidad" value="Moderar Comunidad&#xa;y Fraudes" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="1730" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc_workshop" value="Gestionar&#xa;Workshop" style="ellipse;whiteSpace=wrap;html=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="850" y="980" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_vis_buscar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_visitante" target="uc_buscar_juegos" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_vis_detalle" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_visitante" target="uc_ver_detalle" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_vis_explorar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_visitante" target="uc_explorar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_sesion" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_iniciar_sesion" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_carrito" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_agregar_carrito" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_comprar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_comprar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_biblioteca" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_gestionar_biblioteca" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_resena" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_publicar_resena" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_comunidad" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_comunidad_amigos" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_inventario" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_inventario_mercado" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_reembolso" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_solicitar_reembolso" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_descargar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_descargar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_jug_lista" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_jugador" target="uc_lista_deseados" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_dev_publicar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_dev" target="uc_publicar_software" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_dev_dlc" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_dev" target="uc_subir_dlc" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_dev_stats" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_dev" target="uc_ver_estadisticas" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_dev_descuento" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_dev" target="uc_crear_descuento" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_admin_tickets" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_admin" target="uc_gestionar_tickets" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_admin_moderar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_admin" target="uc_moderar_comunidad" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_pago_procesar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_pago" target="uc_procesar_pago" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel_pago_generar" style="endArrow=none;html=1;strokeWidth=1.5;" edge="1" source="actor_pago" target="uc_generar_recibo" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comprar_sesion" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_comprar" target="uc_iniciar_sesion" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comprar_sesion_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_comprar_sesion">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_sesion_steamguard" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_iniciar_sesion" target="uc_activar_steamguard" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_sesion_steamguard_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_sesion_steamguard">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_comprar_validar" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_comprar" target="uc_validar_disponibilidad" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comprar_validar_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_comprar_validar">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_comprar_impuestos" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_comprar" target="uc_calcular_impuestos" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comprar_impuestos_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_comprar_impuestos">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_comprar_pasarela" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_comprar" target="uc_invocar_pasarela" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comprar_pasarela_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_comprar_pasarela">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rel_pasarela_procesar" style="endArrow=open;html=1;strokeWidth=1.5;" edge="1" source="uc_invocar_pasarela" target="uc_procesar_pago" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comprar_biblioteca" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_comprar" target="uc_agregar_biblioteca" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comprar_biblioteca_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_comprar_biblioteca">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_procesar_recibo" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_procesar_pago" target="uc_generar_recibo" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_procesar_recibo_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_procesar_recibo">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="ext_descuento_comprar" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_aplicar_descuento" target="uc_comprar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_descuento_comprar_lbl" value="&lt;&lt;extend&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="ext_descuento_comprar">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="rel_carrito_comprar" style="endArrow=open;html=1;strokeWidth=1.5;" edge="1" source="uc_agregar_carrito" target="uc_comprar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_bib_descargar" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_gestionar_biblioteca" target="uc_descargar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_bib_descargar_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_bib_descargar">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_bib_instalar" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_gestionar_biblioteca" target="uc_instalar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_bib_instalar_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_bib_instalar">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="ext_actualizar_bib" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_actualizar" target="uc_gestionar_biblioteca" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_actualizar_bib_lbl" value="&lt;&lt;extend&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="ext_actualizar_bib">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="ext_ejecutar_bib" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_ejecutar" target="uc_gestionar_biblioteca" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_ejecutar_bib_lbl" value="&lt;&lt;extend&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="ext_ejecutar_bib">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_descargar_version" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_descargar" target="uc_verificar_version" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_descargar_version_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_descargar_version">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_comunidad_amigo" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_comunidad_amigos" target="uc_agregar_amigo" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comunidad_amigo_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_comunidad_amigo">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_comunidad_perfil" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_comunidad_amigos" target="uc_ver_perfil" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_comunidad_perfil_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_comunidad_perfil">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="ext_workshop_comunidad" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_workshop" target="uc_comunidad_amigos" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_workshop_comunidad_lbl" value="&lt;&lt;extend&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="ext_workshop_comunidad">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_inventario_intercambiar" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_inventario_mercado" target="uc_intercambiar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_inventario_intercambiar_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_inventario_intercambiar">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="ext_vender_inventario" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_vender_mercado" target="uc_inventario_mercado" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_vender_inventario_lbl" value="&lt;&lt;extend&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="ext_vender_inventario">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_reembolso_validar" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_solicitar_reembolso" target="uc_validar_reembolso" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_reembolso_validar_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_reembolso_validar">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_publicar_pagina" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_publicar_software" target="uc_gestionar_pagina" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_publicar_pagina_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_publicar_pagina">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="inc_publicar_precio" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_publicar_software" target="uc_configurar_precio" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc_publicar_precio_lbl" value="&lt;&lt;include&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="inc_publicar_precio">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="ext_lista_buscar" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_lista_deseados" target="uc_buscar_juegos" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_lista_buscar_lbl" value="&lt;&lt;extend&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="ext_lista_buscar">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="ext_logros_resena" style="endArrow=open;html=1;dashed=1;strokeWidth=1.5;" edge="1" source="uc_ver_logros" target="uc_publicar_resena" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ext_logros_resena_lbl" value="&lt;&lt;extend&gt;&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=2;" vertex="1" connectable="0" parent="ext_logros_resena">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="note_rn01" value="RN-01: Reembolso si&#xa;&lt;2h uso y &lt;14 dias&#xa;desde la compra" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fontSize=10;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;spacingLeft=5;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="800" y="1210" width="170" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rn01_link" style="endArrow=none;html=1;dashed=1;strokeColor=#d79b00;" edge="1" source="note_rn01" target="uc_validar_reembolso" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rn02" value="RN-02: Solo usuarios&#xa;que poseen el juego&#xa;pueden publicar resenas" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fontSize=10;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;spacingLeft=5;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="580" y="800" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rn02_link" style="endArrow=none;html=1;dashed=1;strokeColor=#d79b00;" edge="1" source="note_rn02" target="uc_publicar_resena" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rnf03" value="RNF-03: Steam Guard&#xa;obligatorio para&#xa;transacciones" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fontSize=10;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;spacingLeft=5;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="830" y="300" width="160" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rnf03_link" style="endArrow=none;html=1;dashed=1;strokeColor=#d79b00;" edge="1" source="note_rnf03" target="uc_activar_steamguard" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rn03" value="RN-03: Precios regionales&#xa;ajustados por poder&#xa;adquisitivo local" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fontSize=10;fillColor=#ffe6cc;strokeColor=#d79b00;align=left;spacingLeft=5;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="830" y="1420" width="170" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="note_rn03_link" style="endArrow=none;html=1;dashed=1;strokeColor=#d79b00;" edge="1" source="note_rn03" target="uc_configurar_precio" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note_secuencia" value="Trazabilidad con Diag. Secuencia RF-02:&#xa;buscarJuegos() &gt; mostrarDetalleJuego()&#xa;&gt; agregarAlCarrito() &gt; calcularImpuestos()&#xa;&gt; invocarPasarelaPago() &gt; procesarPago()&#xa;&gt; generarRecibo() &gt; agregarJuego()" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=5;verticalAlign=top;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="550" width="280" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="note_secuencia_link" style="endArrow=none;html=1;dashed=1;strokeColor=#82b366;" edge="1" source="note_secuencia" target="uc_comprar" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

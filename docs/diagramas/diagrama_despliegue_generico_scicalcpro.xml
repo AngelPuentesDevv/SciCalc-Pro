@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-04-02T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram id="deploy-scicalcpro-generic-v1" name="Diagrama de Despliegue - SciCalc Pro">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TÍTULO -->
+        <mxCell id="titulo" value="Diagrama de Despliegue — SciCalc Pro" style="text;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="560" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- NODO: Cliente -->
+        <mxCell id="node_client" value="&lt;b&gt;«node»&lt;/b&gt;&lt;br/&gt;Cliente" style="shape=mxgraph.sysml.package;align=left;spacingLeft=8;verticalAlign=top;spacingTop=4;tabWidth=100;tabHeight=24;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_browser" value="«component»&#xa;Navegador Web" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="120" y="390" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- NODO: Servidor de Aplicación -->
+        <mxCell id="node_app" value="&lt;b&gt;«node»&lt;/b&gt;&lt;br/&gt;Servidor de Aplicación" style="shape=mxgraph.sysml.package;align=left;spacingLeft=8;verticalAlign=top;spacingTop=4;tabWidth=220;tabHeight=24;fontSize=12;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="520" y="200" width="360" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_api" value="«component»&#xa;API REST&#xa;/api/v1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="560" y="280" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_ui" value="«component»&#xa;Interfaz Web&#xa;HTML / CSS / JS" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="560" y="390" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_auth" value="«component»&#xa;Autenticación&#xa;JWT" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="560" y="490" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- NODO: Servidor de Base de Datos -->
+        <mxCell id="node_db" value="&lt;b&gt;«node»&lt;/b&gt;&lt;br/&gt;Servidor de Base de Datos" style="shape=mxgraph.sysml.package;align=left;spacingLeft=8;verticalAlign=top;spacingTop=4;tabWidth=240;tabHeight=24;fontSize=12;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="280" width="280" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="comp_dbms" value="«component»&#xa;DBMS Relacional" style="rounded=0;whiteSpace=wrap;html=1;fontSize=11;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="360" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="art_schema" value="«artifact»&#xa;Esquema de Datos&#xa;users · history · sessions" style="shape=mxgraph.uml.component;whiteSpace=wrap;html=1;fontSize=10;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="450" width="190" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════ ENLACES ═══════ -->
+
+        <!-- Cliente → Servidor App -->
+        <mxCell id="lnk_client_app" value="HTTPS&#xa;Petición / Respuesta" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=11;strokeWidth=2;strokeColor=#6c8ebf;endArrow=open;endFill=0;" edge="1" source="node_client" target="node_app" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Servidor App → Base de Datos -->
+        <mxCell id="lnk_app_db" value="TCP / SQL&#xa;Consultas y Transacciones" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=11;strokeWidth=2;strokeColor=#b85450;endArrow=open;endFill=0;" edge="1" source="node_app" target="node_db" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

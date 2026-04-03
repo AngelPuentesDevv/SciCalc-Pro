@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}SciCalc Pro{% endblock %}</title>
+    <style>
+        /* ── Tokens de color (RF-007: modo oscuro/claro) ─────────────────── */
+        :root {
+            --bg:           #f0f2f5;
+            --surface:      #ffffff;
+            --text:         #212121;
+            --muted:        #666666;
+            --primary:      #1565c0;
+            --primary-h:    #0d47a1;
+            --danger:       #c62828;
+            --danger-h:     #b71c1c;
+            --success:      #2e7d32;
+            --border:       #d4d4d4;
+            --shadow:       0 1px 4px rgba(0,0,0,0.08);
+            --nav:          #1565c0;
+        }
+        [data-theme="dark"] {
+            --bg:           #121212;
+            --surface:      #1e1e1e;
+            --text:         #e4e4e4;
+            --muted:        #9a9a9a;
+            --primary:      #42a5f5;
+            --primary-h:    #1e88e5;
+            --danger:       #ef5350;
+            --danger-h:     #e53935;
+            --success:      #66bb6a;
+            --border:       #3d3d3d;
+            --shadow:       0 1px 6px rgba(0,0,0,0.45);
+            --nav:          #0d1b2a;
+        }
+
+        /* ── Reset y base ───────────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        /* ── Barra de navegación ────────────────────────────────────────── */
+        nav {
+            background: var(--nav);
+            padding: 11px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand { color: #fff; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.3px; }
+        .nav-links { display: flex; gap: 6px; align-items: center; }
+        .nav-links a {
+            color: rgba(255,255,255,0.82);
+            text-decoration: none;
+            padding: 5px 11px;
+            border-radius: 4px;
+            font-size: 0.87rem;
+            transition: background 0.15s;
+        }
+        .nav-links a:hover { background: rgba(255,255,255,0.13); color: #fff; }
+
+        /* botón de tema en la nav */
+        #theme-toggle-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.45);
+            color: rgba(255,255,255,0.85);
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            transition: background 0.15s;
+        }
+        #theme-toggle-btn:hover { background: rgba(255,255,255,0.13); }
+
+        /* ── Contenedor de página ───────────────────────────────────────── */
+        .page { max-width: 700px; margin: 0 auto; padding: 28px 20px 40px; }
+        h1 { font-size: 1.5rem; margin-bottom: 22px; }
+        h2 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 14px;
+        }
+
+        /* ── Card ───────────────────────────────────────────────────────── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        /* ── Formularios ────────────────────────────────────────────────── */
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        select {
+            display: block;
+            width: 100%;
+            padding: 9px 12px;
+            font-size: 0.96rem;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--surface);
+            color: var(--text);
+            margin-bottom: 14px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        input:focus, select:focus { border-color: var(--primary); }
+
+        /* ── Botones ────────────────────────────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 18px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.15s, opacity 0.15s;
+            line-height: 1;
+        }
+        .btn-primary  { background: var(--primary);  color: #fff; }
+        .btn-primary:hover  { background: var(--primary-h); }
+        .btn-danger   { background: var(--danger);   color: #fff; }
+        .btn-danger:hover   { background: var(--danger-h); }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--border);
+            color: var(--text);
+        }
+        .btn-outline:hover  { border-color: var(--primary); color: var(--primary); }
+        .btn-outline.active { border-color: var(--primary); color: var(--primary); background: rgba(21,101,192,0.07); }
+        .btn-sm  { padding: 5px 10px; font-size: 0.8rem; }
+        .btn-mem {
+            flex: 1;
+            padding: 8px 4px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: var(--text);
+            cursor: pointer;
+            transition: background 0.12s, border-color 0.12s;
+        }
+        .btn-mem:hover { background: var(--surface); border-color: var(--primary); color: var(--primary); }
+
+        /* ── Div resultado ──────────────────────────────────────────────── */
+        #result {
+            margin-top: 10px;
+            padding: 10px 14px;
+            min-height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--bg);
+            font-size: 1.08rem;
+            word-break: break-all;
+            color: var(--text);
+        }
+
+        /* ── Utilidades de layout ───────────────────────────────────────── */
+        .row   { display: flex; gap: 10px; align-items: flex-end; }
+        .row > .flex-1 { flex: 1; }
+        .col   { display: flex; flex-direction: column; }
+        .mt-10 { margin-top: 10px; }
+        .mt-14 { margin-top: 14px; }
+        .text-success { color: var(--success); }
+        .text-danger  { color: var(--danger);  }
+        .text-muted   { color: var(--muted);   }
+        small { font-size: 0.8rem; }
+        a { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <span class="brand">⚗ SciCalc Pro</span>
+    <div class="nav-links">
+        <a href="/web/login">Iniciar sesión</a>
+        <a href="/web/register">Registro</a>
+        <a href="/web/calculator">Calculadora</a>
+        <button id="theme-toggle-btn" onclick="toggleTheme()">☾ Oscuro</button>
+    </div>
+</nav>
+
+<div class="page">
+    <h1>{% block heading %}SciCalc Pro{% endblock %}</h1>
+    {% block content %}{% endblock %}
+</div>
+
+<footer style="text-align:center; padding:12px; font-size:0.75rem; color:var(--muted); border-top:1px solid var(--border); margin-top:24px;">
+    SciCalc Pro <span style="font-weight:600;">v1.0.0</span> &mdash; Prototipo Web &mdash; FastAPI + PostgreSQL
+</footer>
+
+<script>
+    /* RF-007 — Modo Oscuro/Claro: localStorage → prefers-color-scheme → light */
+    (function () {
+        var saved = localStorage.getItem('scicalc-theme');
+        if (!saved) {
+            saved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', saved);
+        _syncThemeBtn(saved);
+    })();
+
+    function toggleTheme() {
+        var cur  = document.documentElement.getAttribute('data-theme') || 'light';
+        var next = cur === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('scicalc-theme', next);
+        _syncThemeBtn(next);
+    }
+
+    function _syncThemeBtn(theme) {
+        var btn = document.getElementById('theme-toggle-btn');
+        if (btn) btn.textContent = theme === 'dark' ? '☀ Claro' : '☾ Oscuro';
+    }
+</script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

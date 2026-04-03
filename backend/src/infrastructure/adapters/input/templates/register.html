@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Crear Cuenta — SciCalc Pro{% endblock %}
+{% block heading %}Crear Cuenta{% endblock %}
+
+{% block content %}
+<div class="card">
+    <form onsubmit="return false;">
+        <label for="username">Nombre de usuario</label>
+        <input type="text" id="username" name="username" placeholder="Mi nombre" />
+
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" placeholder="usuario@ejemplo.com" />
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password"
+               placeholder="Mínimo 8 caracteres, 1 mayúscula, 1 número" />
+
+        <button type="button" id="btn-register" class="btn btn-primary">Registrarse</button>
+    </form>
+
+    <div id="result" class="mt-10"></div>
+
+    <p class="mt-14 text-muted"><small>
+        ¿Ya tienes cuenta? <a href="/web/login">Inicia sesión</a>
+    </small></p>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('btn-register').addEventListener('click', async function () {
+        var username  = document.getElementById('username').value;
+        var email     = document.getElementById('email').value;
+        var password  = document.getElementById('password').value;
+        var resultDiv = document.getElementById('result');
+        resultDiv.textContent = '';
+        resultDiv.className = 'mt-10';
+
+        var params = new URLSearchParams({
+            email:        email,
+            password:     password,
+            display_name: username
+        });
+
+        try {
+            var resp = await fetch('/api/v1/auth/register?' + params.toString(), {
+                method: 'POST'
+            });
+            var data = await resp.json();
+
+            if (resp.ok) {
+                resultDiv.textContent = 'Usuario registrado exitosamente';
+                resultDiv.className += ' text-success';
+            } else {
+                var detail = data.detail
+                    ? (typeof data.detail === 'object' ? JSON.stringify(data.detail) : data.detail)
+                    : 'Error desconocido';
+                resultDiv.textContent = 'Error: ' + detail;
+                resultDiv.className += ' text-danger';
+            }
+        } catch (err) {
+            resultDiv.textContent = 'Error: ' + err.message;
+            resultDiv.className += ' text-danger';
+        }
+    });
+</script>
+{% endblock %}

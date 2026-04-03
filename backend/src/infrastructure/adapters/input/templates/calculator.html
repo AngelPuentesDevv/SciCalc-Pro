@@ -1,0 +1,543 @@
+{% extends "base.html" %}
+{% block title %}Calculadora — SciCalc Pro{% endblock %}
+{% block heading %}Calculadora Científica{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     RF-001 / RF-002 / RF-008 — Motor matemático + trigonometría + notación
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="card">
+    <h2>Cálculo</h2>
+
+    <label for="expression">Expresión matemática</label>
+    <input type="text" id="expression"
+           placeholder="ej. 2+3*4, sin(90), 1.5e3 * 2, cos(3.14159)" />
+
+    <div class="row">
+        <div class="flex-1 col">
+            <label>Modo angular (RF-002)</label>
+            <!-- RF-002: toggle DEG / RAD visible -->
+            <button type="button" id="angle-mode"
+                    class="btn btn-outline active"
+                    data-mode="DEG"
+                    style="margin-bottom:14px;">DEG</button>
+        </div>
+        <div class="flex-1 col">
+            <label for="precision">Precisión (dígitos)</label>
+            <select id="precision">
+                <option value="10">10 dígitos</option>
+                <option value="15" selected>15 dígitos</option>
+                <option value="50">50 dígitos (mpmath)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- RF-006: preview en vivo mientras se escribe (dry_run) -->
+    <div id="preview" style="min-height:22px;font-size:0.88rem;color:var(--muted);font-family:monospace;margin-bottom:6px;"></div>
+
+    <button type="button" id="btn-calculate" class="btn btn-primary">
+        = Calcular
+    </button>
+
+    <!-- RF-001 / RF-008: resultado (puede ser notación científica) -->
+    <div id="result"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     RF-004 — Funciones de memoria: M+, M−, MR, MC
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="card">
+    <h2>Memoria (RF-004)</h2>
+
+    <div class="row" style="margin-bottom:10px;">
+        <button type="button" id="btn-memory-plus"  class="btn-mem">M+</button>
+        <button type="button" id="btn-memory-minus" class="btn-mem">M−</button>
+        <button type="button" id="btn-memory-recall" class="btn-mem">MR</button>
+        <button type="button" id="btn-memory-clear" class="btn-mem">MC</button>
+    </div>
+
+    <div style="font-size:0.88rem; color:var(--muted); min-height:22px;">
+        Memoria:
+        <strong id="memory-indicator" style="color:var(--primary);margin-left:4px;"></strong>
+        <span id="memory-display" style="margin-left:6px;font-family:monospace;"></span>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     RF-005 — Convertidor de unidades (cliente, sin API)
+     Categorías: LENGTH · MASS · TEMP · VOLUME · SPEED
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="card">
+    <h2>Convertidor de Unidades (RF-005)</h2>
+
+    <label for="converter-category">Categoría</label>
+    <select id="converter-category">
+        <option value="LENGTH">Longitud</option>
+        <option value="MASS">Masa</option>
+        <option value="TEMP">Temperatura</option>
+        <option value="VOLUME">Volumen</option>
+        <option value="SPEED">Velocidad</option>
+    </select>
+
+    <div class="row">
+        <div class="flex-1 col">
+            <label for="converter-from">De</label>
+            <select id="converter-from"></select>
+        </div>
+        <div class="flex-1 col">
+            <label for="converter-to">A</label>
+            <select id="converter-to"></select>
+        </div>
+    </div>
+
+    <label for="converter-value">Valor a convertir</label>
+    <input type="number" id="converter-value" placeholder="ej. 1000" />
+
+    <button type="button" id="btn-convert" class="btn btn-primary">
+        Convertir
+    </button>
+
+    <div id="converter-result" style="margin-top:10px;font-size:1.05rem;font-weight:600;color:var(--success);min-height:24px;"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     RF-003 — Historial de operaciones (últimas 50, borrado lógico)
+     ═══════════════════════════════════════════════════════════════════════ -->
+<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <h2 style="margin-bottom:0;">Historial (RF-003)</h2>
+        <div style="display:flex;gap:6px;">
+            <button type="button" id="btn-export-json" class="btn btn-outline btn-sm">↓ JSON</button>
+            <button type="button" id="btn-export-csv"  class="btn btn-outline btn-sm">↓ CSV</button>
+        </div>
+    </div>
+    <div id="history-list" style="font-size:0.92rem;"></div>
+    <p id="history-empty" class="text-muted" style="font-size:0.87rem;display:none;">
+        Sin historial. Realiza un cálculo para empezar.
+    </p>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+/* ══════════════════════════════════════════════════════════════════════════
+   Estado global de la calculadora
+   ══════════════════════════════════════════════════════════════════════════ */
+var currentAngleMode = 'DEG';   // RF-002
+var memoryValue      = null;    // RF-004
+var _previewTimer    = null;    // RF-006: debounce handle
+
+/* ── RF-006: Preview en vivo con debounce 400 ms (dry_run=true) ─────────── */
+document.getElementById('expression').addEventListener('input', function () {
+    clearTimeout(_previewTimer);
+    var expr    = this.value.trim();
+    var preview = document.getElementById('preview');
+    if (!expr) { preview.textContent = ''; return; }
+
+    _previewTimer = setTimeout(async function () {
+        var token = sessionStorage.getItem('access_token');
+        if (!token) return;
+        try {
+            var resp = await fetch('/api/v1/calculate', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                body: JSON.stringify({
+                    expression:       expr,
+                    precision_digits: parseInt(document.getElementById('precision').value, 10),
+                    angle_mode:       currentAngleMode,
+                    dry_run:          true
+                })
+            });
+            var data = await resp.json();
+            if (resp.ok && data.result) {
+                preview.textContent = '≈ ' + data.result;
+                preview.style.color = 'var(--muted)';
+            } else if (data.error) {
+                preview.textContent = '';
+            }
+        } catch (_) { preview.textContent = ''; }
+    }, 400);
+});
+
+/* ── RF-002: Toggle DEG / RAD ────────────────────────────────────────────── */
+document.getElementById('angle-mode').addEventListener('click', function () {
+    currentAngleMode = currentAngleMode === 'DEG' ? 'RAD' : 'DEG';
+    this.textContent = currentAngleMode;
+    this.setAttribute('data-mode', currentAngleMode);
+});
+
+/* ── RF-001 / RF-002 / RF-008: Calcular expresión ───────────────────────── */
+document.getElementById('btn-calculate').addEventListener('click', async function () {
+    var expression = document.getElementById('expression').value.trim();
+    var precision  = parseInt(document.getElementById('precision').value, 10);
+    var token      = sessionStorage.getItem('access_token');
+    var resultDiv  = document.getElementById('result');
+    resultDiv.textContent = '';
+    resultDiv.className   = '';
+
+    if (!expression) {
+        resultDiv.textContent = 'Error: ingresa una expresión';
+        resultDiv.className   = 'text-danger';
+        return;
+    }
+
+    try {
+        var resp = await fetch('/api/v1/calculate', {
+            method:  'POST',
+            headers: {
+                'Content-Type':  'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                expression:     expression,
+                precision_digits: precision,
+                angle_mode:     currentAngleMode   /* RF-002: dinámico */
+            })
+        });
+        var data = await resp.json();
+
+        if (resp.ok) {
+            /* RF-008: el backend puede devolver notación científica */
+            resultDiv.textContent = data.result;
+            resultDiv.className   = 'text-success';
+            await loadHistory();
+        } else {
+            var detail = data.detail
+                ? (typeof data.detail === 'object' ? JSON.stringify(data.detail) : data.detail)
+                : 'Error desconocido';
+            resultDiv.textContent = 'Error: ' + detail;
+            resultDiv.className   = 'text-danger';
+        }
+    } catch (err) {
+        resultDiv.textContent = 'Error: ' + err.message;
+        resultDiv.className   = 'text-danger';
+    }
+});
+
+/* ── RF-004: Funciones de memoria (persistidas en user_preferences) ─────── */
+async function _fetchMemory() {
+    var token = sessionStorage.getItem('access_token');
+    if (!token) return;
+    try {
+        var r = await fetch('/api/v1/preferences/memory', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (r.ok) {
+            var d = await r.json();
+            memoryValue = d.value;
+            _updateMemoryDisplay();
+        }
+    } catch (_) {}
+}
+
+async function _saveMemory(value) {
+    var token = sessionStorage.getItem('access_token');
+    if (!token) return;
+    await fetch('/api/v1/preferences/memory', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+        body:    JSON.stringify({ value: value })
+    });
+}
+
+async function _clearMemoryApi() {
+    var token = sessionStorage.getItem('access_token');
+    if (!token) return;
+    await fetch('/api/v1/preferences/memory', {
+        method:  'DELETE',
+        headers: { 'Authorization': 'Bearer ' + token }
+    });
+}
+
+document.getElementById('btn-memory-plus').addEventListener('click', async function () {
+    var val = parseFloat(document.getElementById('result').textContent);
+    if (!isNaN(val)) {
+        memoryValue = (memoryValue || 0) + val;
+        _updateMemoryDisplay();
+        await _saveMemory(memoryValue);
+    }
+});
+
+document.getElementById('btn-memory-minus').addEventListener('click', async function () {
+    var val = parseFloat(document.getElementById('result').textContent);
+    if (!isNaN(val)) {
+        memoryValue = (memoryValue || 0) - val;
+        _updateMemoryDisplay();
+        await _saveMemory(memoryValue);
+    }
+});
+
+document.getElementById('btn-memory-recall').addEventListener('click', async function () {
+    await _fetchMemory();
+    if (memoryValue !== null) {
+        var expr = document.getElementById('expression');
+        expr.value = String(memoryValue);
+        expr.focus();
+    }
+});
+
+document.getElementById('btn-memory-clear').addEventListener('click', async function () {
+    memoryValue = null;
+    _updateMemoryDisplay();
+    await _clearMemoryApi();
+});
+
+function _updateMemoryDisplay() {
+    var indicator = document.getElementById('memory-indicator');
+    var display   = document.getElementById('memory-display');
+    if (memoryValue !== null) {
+        indicator.textContent = 'M';
+        display.textContent   = memoryValue;
+    } else {
+        indicator.textContent = '';
+        display.textContent   = '';
+    }
+}
+
+/* Cargar memoria al abrir la página */
+_fetchMemory();
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RF-005: Convertidor de unidades (todo cliente — sin llamada API)
+   ══════════════════════════════════════════════════════════════════════════ */
+var UNIT_DATA = {
+    LENGTH: {
+        units: [
+            {value:'m',  label:'Metro (m)'},
+            {value:'km', label:'Kilómetro (km)'},
+            {value:'cm', label:'Centímetro (cm)'},
+            {value:'mm', label:'Milímetro (mm)'},
+            {value:'mi', label:'Milla (mi)'},
+            {value:'ft', label:'Pie (ft)'},
+            {value:'in', label:'Pulgada (in)'}
+        ],
+        toBase: {m:1, km:1000, cm:0.01, mm:0.001, mi:1609.344, ft:0.3048, in:0.0254}
+    },
+    MASS: {
+        units: [
+            {value:'kg',  label:'Kilogramo (kg)'},
+            {value:'g',   label:'Gramo (g)'},
+            {value:'mg',  label:'Miligramo (mg)'},
+            {value:'lb',  label:'Libra (lb)'},
+            {value:'oz',  label:'Onza (oz)'},
+            {value:'t',   label:'Tonelada métrica (t)'}
+        ],
+        toBase: {kg:1, g:0.001, mg:0.000001, lb:0.453592, oz:0.0283495, t:1000}
+    },
+    TEMP: {
+        units: [
+            {value:'C', label:'Celsius (°C)'},
+            {value:'F', label:'Fahrenheit (°F)'},
+            {value:'K', label:'Kelvin (K)'}
+        ],
+        toBase: null   /* conversión especial */
+    },
+    VOLUME: {
+        units: [
+            {value:'L',     label:'Litro (L)'},
+            {value:'mL',    label:'Mililitro (mL)'},
+            {value:'m3',    label:'Metro cúbico (m³)'},
+            {value:'cm3',   label:'Centímetro cúbico (cm³)'},
+            {value:'gal',   label:'Galón EE.UU. (gal)'},
+            {value:'fl_oz', label:'Onza líquida (fl oz)'}
+        ],
+        toBase: {L:1, mL:0.001, m3:1000, cm3:0.001, gal:3.78541, fl_oz:0.0295735}
+    },
+    SPEED: {
+        units: [
+            {value:'m_s',  label:'Metro/segundo (m/s)'},
+            {value:'km_h', label:'Kilómetro/hora (km/h)'},
+            {value:'mph',  label:'Milla/hora (mph)'},
+            {value:'knot', label:'Nudo (knot)'},
+            {value:'ft_s', label:'Pie/segundo (ft/s)'}
+        ],
+        toBase: {m_s:1, km_h:0.277778, mph:0.44704, knot:0.514444, ft_s:0.3048}
+    }
+};
+
+function _populateUnitSelects(category) {
+    var units   = UNIT_DATA[category].units;
+    var fromSel = document.getElementById('converter-from');
+    var toSel   = document.getElementById('converter-to');
+    fromSel.innerHTML = '';
+    toSel.innerHTML   = '';
+    units.forEach(function (u, i) {
+        var optA = new Option(u.label, u.value);
+        var optB = new Option(u.label, u.value);
+        fromSel.add(optA);
+        toSel.add(optB);
+        if (i === 1) toSel.value = u.value;  /* default: segunda unidad en destino */
+    });
+    document.getElementById('converter-result').textContent = '';
+}
+
+document.getElementById('converter-category').addEventListener('change', function () {
+    _populateUnitSelects(this.value);
+});
+
+/* Inicializar selects con la categoría por defecto (LENGTH) */
+_populateUnitSelects('LENGTH');
+
+document.getElementById('btn-convert').addEventListener('click', function () {
+    var category  = document.getElementById('converter-category').value;
+    var fromUnit  = document.getElementById('converter-from').value;
+    var toUnit    = document.getElementById('converter-to').value;
+    var rawVal    = document.getElementById('converter-value').value;
+    var resultDiv = document.getElementById('converter-result');
+
+    var val = parseFloat(rawVal);
+    if (isNaN(val)) {
+        resultDiv.textContent = 'Error: ingresa un número válido';
+        resultDiv.style.color = 'var(--danger)';
+        return;
+    }
+
+    var converted;
+    if (category === 'TEMP') {
+        converted = _convertTemp(val, fromUnit, toUnit);
+    } else {
+        var data     = UNIT_DATA[category];
+        var inBase   = val * data.toBase[fromUnit];
+        converted    = inBase / data.toBase[toUnit];
+    }
+
+    /* Formato: hasta 10 decimales significativos */
+    var formatted = parseFloat(converted.toPrecision(10));
+    var unitLabel = UNIT_DATA[category].units.find(function (u) { return u.value === toUnit; });
+    resultDiv.textContent = formatted + ' ' + (unitLabel ? unitLabel.label.match(/\(([^)]+)\)/)[1] : toUnit);
+    resultDiv.style.color = 'var(--success)';
+});
+
+function _convertTemp(val, from, to) {
+    var celsius;
+    if (from === 'C') celsius = val;
+    else if (from === 'F') celsius = (val - 32) * 5 / 9;
+    else celsius = val - 273.15;   /* K */
+
+    if (to === 'C') return celsius;
+    if (to === 'F') return celsius * 9 / 5 + 32;
+    return celsius + 273.15;       /* K */
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RF-003: Historial de operaciones
+   ══════════════════════════════════════════════════════════════════════════ */
+async function loadHistory() {
+    var token = sessionStorage.getItem('access_token');
+    if (!token) return;
+
+    try {
+        var resp = await fetch('/api/v1/history', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (!resp.ok) return;
+
+        var items   = await resp.json();
+        var listDiv = document.getElementById('history-list');
+        var emptyP  = document.getElementById('history-empty');
+        listDiv.innerHTML = '';
+
+        if (!items || items.length === 0) {
+            emptyP.style.display = '';
+            return;
+        }
+        emptyP.style.display = 'none';
+
+        items.forEach(function (item) {
+            var entry = document.createElement('div');
+            entry.setAttribute('data-id', item.id);
+            entry.style.cssText = [
+                'display:flex',
+                'justify-content:space-between',
+                'align-items:center',
+                'padding:7px 0',
+                'border-bottom:1px solid var(--border)'
+            ].join(';');
+
+            var text = document.createElement('span');
+            text.style.fontFamily = 'monospace';
+            text.textContent = item.expression + '  =  ' + item.result;
+
+            var actions = document.createElement('div');
+            actions.style.cssText = 'display:flex;gap:4px;flex-shrink:0;';
+
+            var reuseBtn = document.createElement('button');
+            reuseBtn.className   = 'btn-reuse btn btn-outline btn-sm';
+            reuseBtn.textContent = '↑ Reutilizar';
+            reuseBtn.setAttribute('data-expr', item.expression);
+
+            var delBtn = document.createElement('button');
+            delBtn.className   = 'btn-delete btn btn-outline btn-sm';
+            delBtn.textContent = 'Borrar';
+            delBtn.setAttribute('data-id', item.id);
+
+            actions.appendChild(reuseBtn);
+            actions.appendChild(delBtn);
+            entry.appendChild(text);
+            entry.appendChild(actions);
+            listDiv.appendChild(entry);
+        });
+
+        /* Asignar listeners de reutilizar */
+        document.querySelectorAll('.btn-reuse').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var expr = btn.getAttribute('data-expr');
+                var input = document.getElementById('expression');
+                input.value = expr;
+                input.focus();
+                input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+
+        /* Asignar listeners de borrado */
+        document.querySelectorAll('.btn-delete').forEach(function (btn) {
+            btn.addEventListener('click', async function () {
+                var id    = btn.getAttribute('data-id');
+                var token = sessionStorage.getItem('access_token');
+                var resp  = await fetch('/api/v1/history/' + id, {
+                    method:  'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                if (resp.ok) {
+                    var entryDiv = document.querySelector('div[data-id="' + id + '"]');
+                    if (entryDiv) entryDiv.remove();
+                }
+            });
+        });
+
+    } catch (err) {
+        console.error('Error cargando historial:', err);
+    }
+}
+
+/* ── RF-003: Exportar historial ─────────────────────────────────────────── */
+function _exportHistory(format) {
+    var token = sessionStorage.getItem('access_token');
+    if (!token) return;
+    var a = document.createElement('a');
+    a.href = '/api/v1/history/export?format=' + format;
+    /* El Bearer token no puede enviarse en href directo; usamos fetch + blob */
+    fetch(a.href, { headers: { 'Authorization': 'Bearer ' + token } })
+        .then(function (r) { return r.blob(); })
+        .then(function (blob) {
+            var url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = 'historial_scicalc.' + format;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+}
+
+document.getElementById('btn-export-json').addEventListener('click', function () { _exportHistory('json'); });
+document.getElementById('btn-export-csv').addEventListener('click',  function () { _exportHistory('csv');  });
+
+/* Cargar historial al abrir la página si ya hay token */
+loadHistory();
+</script>
+{% endblock %}
