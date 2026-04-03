@@ -1,4 +1,3 @@
-import re
 from ...domain.entities.profile import Profile
 from ...domain.ports.output.profile_repository_port import ProfileRepositoryPort
 from ...domain.exceptions.domain_exceptions import DomainError
