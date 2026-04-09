@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-04-08T00:00:00.000Z" agent="Claude" version="24.0.0" type="device">
+  <diagram id="er-scicalcpro-v1" name="Diagrama E/R - SciCalc Pro">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TÍTULO -->
+        <mxCell id="titulo" value="Diagrama Entidad-Relación — SciCalc Pro" style="text;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="800" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             TABLA: users  (x=60, y=100)
+             ════════════════════════════════════════════════════════ -->
+        <mxCell id="users-hdr" value="users" style="swimlane;fontStyle=1;align=center;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="60" y="100" width="280" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="u1" value="🔑 id : VARCHAR(36) PK" style="text;align=left;spacingLeft=8;" vertex="1" parent="users-hdr">
+          <mxGeometry y="26" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u2" value="email : VARCHAR(255) UNIQUE NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="users-hdr">
+          <mxGeometry y="52" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u3" value="password_hash : VARCHAR(255) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="users-hdr">
+          <mxGeometry y="78" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u4" value="display_name : VARCHAR(100) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="users-hdr">
+          <mxGeometry y="104" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u5" value="created_at : TIMESTAMPTZ" style="text;align=left;spacingLeft=8;" vertex="1" parent="users-hdr">
+          <mxGeometry y="130" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u6" value="updated_at : TIMESTAMPTZ" style="text;align=left;spacingLeft=8;" vertex="1" parent="users-hdr">
+          <mxGeometry y="156" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="u7" value="is_deleted : BOOLEAN NOT NULL DEFAULT false" style="text;align=left;spacingLeft=8;" vertex="1" parent="users-hdr">
+          <mxGeometry y="182" width="280" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             TABLA: profiles  (x=420, y=100)
+             ════════════════════════════════════════════════════════ -->
+        <mxCell id="profiles-hdr" value="profiles" style="swimlane;fontStyle=1;align=center;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="420" y="100" width="310" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="🔑 id : VARCHAR(36) PK" style="text;align=left;spacingLeft=8;" vertex="1" parent="profiles-hdr">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="🔗 user_id : VARCHAR(36) FK → users.id" style="text;align=left;spacingLeft=8;" vertex="1" parent="profiles-hdr">
+          <mxGeometry y="52" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="avatar_url : VARCHAR(500)" style="text;align=left;spacingLeft=8;" vertex="1" parent="profiles-hdr">
+          <mxGeometry y="78" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="preferred_precision : INTEGER DEFAULT 10" style="text;align=left;spacingLeft=8;" vertex="1" parent="profiles-hdr">
+          <mxGeometry y="104" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="angle_mode : VARCHAR(3) DEFAULT 'DEG'" style="text;align=left;spacingLeft=8;" vertex="1" parent="profiles-hdr">
+          <mxGeometry y="130" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" value="theme : VARCHAR(5) DEFAULT 'LIGHT'" style="text;align=left;spacingLeft=8;" vertex="1" parent="profiles-hdr">
+          <mxGeometry y="156" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="p7" value="updated_at : TIMESTAMPTZ | is_deleted : BOOLEAN" style="text;align=left;spacingLeft=8;" vertex="1" parent="profiles-hdr">
+          <mxGeometry y="182" width="310" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             TABLA: calculation_history  (x=800, y=100)
+             ════════════════════════════════════════════════════════ -->
+        <mxCell id="calchistory-hdr" value="calculation_history" style="swimlane;fontStyle=1;align=center;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="800" y="100" width="320" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="ch1" value="🔑 id : VARCHAR(36) PK" style="text;align=left;spacingLeft=8;" vertex="1" parent="calchistory-hdr">
+          <mxGeometry y="26" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ch2" value="🔗 user_id : VARCHAR(36) FK → users.id" style="text;align=left;spacingLeft=8;" vertex="1" parent="calchistory-hdr">
+          <mxGeometry y="52" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ch3" value="expression : TEXT NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="calchistory-hdr">
+          <mxGeometry y="78" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ch4" value="result : TEXT NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="calchistory-hdr">
+          <mxGeometry y="104" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ch5" value="precision_digits : INTEGER DEFAULT 10" style="text;align=left;spacingLeft=8;" vertex="1" parent="calchistory-hdr">
+          <mxGeometry y="130" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ch6" value="created_at : TIMESTAMPTZ" style="text;align=left;spacingLeft=8;" vertex="1" parent="calchistory-hdr">
+          <mxGeometry y="156" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ch7" value="sync_version : INTEGER | device_id : VARCHAR(64) | is_deleted : BOOLEAN" style="text;align=left;spacingLeft=8;" vertex="1" parent="calchistory-hdr">
+          <mxGeometry y="182" width="320" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             TABLA: user_preferences  (x=60, y=380)
+             ════════════════════════════════════════════════════════ -->
+        <mxCell id="prefs-hdr" value="user_preferences" style="swimlane;fontStyle=1;align=center;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="60" y="390" width="310" height="184" as="geometry" />
+        </mxCell>
+        <mxCell id="pr1" value="🔑 id : VARCHAR(36) PK" style="text;align=left;spacingLeft=8;" vertex="1" parent="prefs-hdr">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pr2" value="🔗 user_id : VARCHAR(36) FK → users.id" style="text;align=left;spacingLeft=8;" vertex="1" parent="prefs-hdr">
+          <mxGeometry y="52" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pr3" value="key : VARCHAR(50) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="prefs-hdr">
+          <mxGeometry y="78" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pr4" value="value : VARCHAR(500)" style="text;align=left;spacingLeft=8;" vertex="1" parent="prefs-hdr">
+          <mxGeometry y="104" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pr5" value="updated_at : TIMESTAMPTZ | is_deleted : BOOLEAN" style="text;align=left;spacingLeft=8;" vertex="1" parent="prefs-hdr">
+          <mxGeometry y="130" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="pr6" value="UNIQUE (user_id, key)" style="text;align=left;spacingLeft=8;fontStyle=2;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="prefs-hdr">
+          <mxGeometry y="156" width="310" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             TABLA: favorite_conversions  (x=420, y=380)
+             ════════════════════════════════════════════════════════ -->
+        <mxCell id="favconv-hdr" value="favorite_conversions" style="swimlane;fontStyle=1;align=center;startSize=26;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="420" y="390" width="310" height="184" as="geometry" />
+        </mxCell>
+        <mxCell id="fc1" value="🔑 id : VARCHAR(36) PK" style="text;align=left;spacingLeft=8;" vertex="1" parent="favconv-hdr">
+          <mxGeometry y="26" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fc2" value="🔗 user_id : VARCHAR(36) FK → users.id" style="text;align=left;spacingLeft=8;" vertex="1" parent="favconv-hdr">
+          <mxGeometry y="52" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fc3" value="from_unit : VARCHAR(30) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="favconv-hdr">
+          <mxGeometry y="78" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fc4" value="to_unit : VARCHAR(30) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="favconv-hdr">
+          <mxGeometry y="104" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fc5" value="category : VARCHAR(10) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="favconv-hdr">
+          <mxGeometry y="130" width="310" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="fc6" value="is_deleted : BOOLEAN NOT NULL DEFAULT false" style="text;align=left;spacingLeft=8;" vertex="1" parent="favconv-hdr">
+          <mxGeometry y="156" width="310" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             TABLA: sessions  (x=800, y=380)
+             ════════════════════════════════════════════════════════ -->
+        <mxCell id="sessions-hdr" value="sessions" style="swimlane;fontStyle=1;align=center;startSize=26;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="800" y="390" width="320" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="🔑 id : VARCHAR(36) PK" style="text;align=left;spacingLeft=8;" vertex="1" parent="sessions-hdr">
+          <mxGeometry y="26" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="🔗 user_id : VARCHAR(36) FK → users.id" style="text;align=left;spacingLeft=8;" vertex="1" parent="sessions-hdr">
+          <mxGeometry y="52" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="browser_agent : VARCHAR(255) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="sessions-hdr">
+          <mxGeometry y="78" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="jwt_token_hash : VARCHAR(255) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="sessions-hdr">
+          <mxGeometry y="104" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="expires_at : TIMESTAMPTZ NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="sessions-hdr">
+          <mxGeometry y="130" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="s6" value="is_active : BOOLEAN NOT NULL DEFAULT true" style="text;align=left;spacingLeft=8;" vertex="1" parent="sessions-hdr">
+          <mxGeometry y="156" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="s7" value="created_at : TIMESTAMPTZ | is_deleted : BOOLEAN" style="text;align=left;spacingLeft=8;" vertex="1" parent="sessions-hdr">
+          <mxGeometry y="182" width="320" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             TABLA: audit_log  (x=1190, y=240)
+             ════════════════════════════════════════════════════════ -->
+        <mxCell id="auditlog-hdr" value="audit_log" style="swimlane;fontStyle=1;align=center;startSize=26;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="240" width="320" height="236" as="geometry" />
+        </mxCell>
+        <mxCell id="al1" value="🔑 id : VARCHAR(36) PK" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="26" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="al2" value="🔗 user_id : VARCHAR(36) FK → users.id" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="52" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="al3" value="entity_type : VARCHAR(50) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="78" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="al4" value="entity_id : VARCHAR(36) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="104" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="al5" value="action : VARCHAR(20) NOT NULL" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="130" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="al6" value="status : VARCHAR(20) NOT NULL DEFAULT 'success'" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="156" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="al7" value="payload : JSON" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="182" width="320" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="al8" value="created_at : TIMESTAMPTZ NOT NULL | is_deleted : BOOLEAN" style="text;align=left;spacingLeft=8;" vertex="1" parent="auditlog-hdr">
+          <mxGeometry y="208" width="320" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- ════════════════════════════════════════════════════════
+             RELACIONES  (FK arrows)
+             ════════════════════════════════════════════════════════ -->
+
+        <!-- users → profiles  (1:1) -->
+        <mxCell id="rel-users-profiles" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;" edge="1" source="users-hdr" target="profiles-hdr" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-u-p" value="1 : 1" style="text;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="185" width="36" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- users → calculation_history  (1:N) -->
+        <mxCell id="rel-users-calc" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;" edge="1" source="users-hdr" target="calchistory-hdr" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-u-ch" value="1 : N" style="text;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="155" width="36" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- users → user_preferences  (1:N) -->
+        <mxCell id="rel-users-prefs" style="edgeStyle=orthogonalEdgeStyle;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;" edge="1" source="users-hdr" target="prefs-hdr" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-u-pr" value="1 : N" style="text;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="355" width="36" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- users → favorite_conversions  (1:N) -->
+        <mxCell id="rel-users-fav" style="edgeStyle=orthogonalEdgeStyle;exitX=0.6;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;" edge="1" source="users-hdr" target="favconv-hdr" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-u-fc" value="1 : N" style="text;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="355" width="36" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- users → sessions  (1:N) -->
+        <mxCell id="rel-users-sess" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.65;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;" edge="1" source="users-hdr" target="sessions-hdr" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl-u-s" value="1 : N" style="text;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="230" width="36" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- users → audit_log  (1:N) -->
+        <mxCell id="rel-users-audit" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;" edge="1" source="calchistory-hdr" target="auditlog-hdr" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1155" y="205" />
+              <mxPoint x="1155" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-direct-audit" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.15;entryDx=0;entryDy=0;endArrow=ERmany;startArrow=ERone;startFill=0;endFill=0;" edge="1" source="users-hdr" target="auditlog-hdr" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1155" y="205" />
+              <mxPoint x="1155" y="276" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl-u-audit" value="1 : N" style="text;align=center;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="248" width="36" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- LEYENDA -->
+        <mxCell id="leyenda-bg" value="" style="rounded=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="60" y="640" width="340" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="leyenda-title" value="Leyenda" style="text;align=left;fontStyle=1;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="68" y="645" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leyenda1" value="🔑 PK — Clave Primaria (UUID VARCHAR 36)" style="text;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="68" y="666" width="324" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leyenda2" value="🔗 FK — Clave Foránea   |   1:N — uno a muchos   |   1:1 — uno a uno" style="text;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="68" y="686" width="324" height="24" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -13,8 +13,10 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.alter_column("sessions", "device_id", new_column_name="browser_agent")
+    # No-op: migration 000 already creates sessions.browser_agent directly.
+    # This migration only applied to pre-existing DBs that had device_id.
+    pass
 
 
 def downgrade() -> None:
-    op.alter_column("sessions", "browser_agent", new_column_name="device_id")
+    pass

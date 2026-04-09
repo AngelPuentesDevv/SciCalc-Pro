@@ -23,7 +23,6 @@ jobs:
         run: |
           cd backend
           pip install -e ".[dev]"
-          pip install ruff
 
       - name: Ejecutar ruff
         run: |
@@ -56,7 +55,6 @@ jobs:
             --cov=src \
             --cov-report=xml:coverage.xml \
             --cov-report=term-missing
-        # Nota: la cobertura de unit/ sola (~42%) se complementa con integration/
 
       - name: Subir reporte de cobertura (unit)
         uses: actions/upload-artifact@v4.6.2
@@ -161,12 +159,10 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Instalar Google Chrome
-        run: |
-          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-          sudo apt-get update -q
-          sudo apt-get install -y google-chrome-stable
+      # Instala Chrome + ChromeDriver compatibles mediante la action oficial
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
 
       - name: Instalar dependencias Python
         run: |
@@ -178,23 +174,12 @@ jobs:
           cd backend
           alembic upgrade head
 
-      - name: Arrancar servidor en background
-        run: |
-          cd backend
-          python run.py &
-          echo $! > /tmp/server.pid
-          sleep 5
-          curl --retry 5 --retry-delay 2 http://localhost:8000/health
-
+      # El conftest.py levanta uvicorn internamente en el puerto 8001;
+      # no es necesario arrancar el servidor de forma separada.
       - name: Ejecutar pruebas E2E
         run: |
           cd backend
           pytest tests/e2e/ -v -m e2e
-
-      - name: Detener servidor
-        if: always()
-        run: |
-          if [ -f /tmp/server.pid ]; then kill $(cat /tmp/server.pid) || true; fi
 
   # ─── ETAPA 5: Análisis SonarQube ─────────────────────────────────────────
   sonarqube:
@@ -216,7 +201,7 @@ jobs:
           path: backend/
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
