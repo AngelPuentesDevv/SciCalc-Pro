@@ -11,14 +11,14 @@ web_router = APIRouter(prefix="/web", tags=["web"])
 
 @web_router.get("/login", response_class=HTMLResponse)
 async def web_login(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="login.html")
 
 
 @web_router.get("/register", response_class=HTMLResponse)
 async def web_register(request: Request):
-    return templates.TemplateResponse("register.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="register.html")
 
 
 @web_router.get("/calculator", response_class=HTMLResponse)
 async def web_calculator(request: Request):
-    return templates.TemplateResponse("calculator.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="calculator.html")
